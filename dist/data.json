@@ -1,0 +1,20 @@
+{
+    "name": "John Doe",
+
+    "links": {
+        "Link One": "https://link.com/",
+        "Link Tow": "https://link.com",
+        "Link Three": "https://link.com",
+        "Link Four": "https://link.com",
+        "Link Five": "https://link.com",
+        "Link Six": "https://link.com",
+        "Link Seven": "https://link.com"
+    },
+
+    "social": {
+        "github": "https://github.com/0xkhan",
+        "dribbble": "https://dribbble.com/0xkhani",
+        "twitter": "https://twitter.com/0xkhani",
+        "instagram": "https://instagram.com/0xkhani"
+    }
+}

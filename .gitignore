@@ -1,0 +1,64 @@
+#All the files inside src folder 
+#src/*
+
+#Ignore all the files inside src folder except style.css
+#!src/style.css
+
+#All files with .zip extensions
+#*.zip
+
+# Macs DS files
+.DS_Store
+
+# Environment files
+.env
+
+# Packages #
+#####################
+*.7z
+*.dmg
+*.gz
+*.bz2
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+*.tgz
+*.map
+
+# Logs and Databases #
+######################
+*.log
+*.sql
+
+# OS generated files #
+######################
+**.DS_Store*
+ehthumbs.db
+Icon?
+Thumbs.db
+._*
+
+# Vim generated files #
+#######################
+*.un~
+
+# SASS #
+#######################
+**/.sass-cache
+**/.sass-cache/*
+**/.map
+
+# Composer #
+#######################
+vendor
+!assets/js/vendor/
+wpcs/
+composer.lock
+dist/mix-manifest.json
+
+# NPM #
+#######################
+node_modules
+package-lock.json

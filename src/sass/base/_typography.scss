@@ -1,0 +1,30 @@
+@use '../abstracts' as *;
+
+body {
+    font-family: $font-family-sans-serif;
+    line-height: 1.7;
+}
+
+.heading-bold {
+    font-weight: var(--font-weight-bold);
+}
+
+.heading-light {
+    font-weight: var(--font-weight-light);
+}
+
+.heading-1 {
+    font-size: var(--font-size-h1);
+}
+
+.heading-2 {
+    font-size: var(--font-size-h2);
+}
+
+.heading-3 {
+    font-size: var(--font-size-h3);
+}
+
+.lead {
+    font-size: var(--font-size-lead);
+}

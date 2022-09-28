@@ -1,0 +1,32 @@
+:root {
+    // COLORS
+    --color-primary: #3A3B44;
+    --color-secondary: #AAAAAF;
+    --color-foreground: #FAFAFC;
+    --color-foreground-2: #EAEAED;
+    --color-background: #FFFFFF;
+
+    --color-dark-primary: #FAFAFC;
+    --color-dark-secondary: #AAAAAF;
+    --color-dark-foreground: #5A5B63;
+    --color-dark-foreground-2: #2A2B35;
+    --color-dark-background: #1A1A23;
+
+    --color-black: #000000;
+    --color-white: #FFFFFF;
+
+    // FONT SIZES
+    --font-size-default: 1.6rem;
+    --font-size-lead: 1.8rem;
+
+    // NORMAL HEADINGS
+    --font-size-h1: 6rem;
+    --font-size-h2: 3rem;
+    --font-size-h3: 2rem;
+
+    // FONT WEIGHTS
+    --font-weight-thin: 200;
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-bold: 600;
+}

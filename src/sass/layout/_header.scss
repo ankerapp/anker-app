@@ -1,0 +1,30 @@
+@use '../abstracts' as *;
+
+.header {
+    grid-column: col-start 4 / col-end 9;
+    padding: 4rem;
+
+    @include respond(tab-port) {
+        grid-column: col-start 3 / col-end 10;
+    }
+
+    @include respond(phone) {
+        grid-column: col-start 1 / col-end 12;
+        padding: 4rem 2rem;
+    }
+
+    &__image-box {
+        width: 12rem;
+        margin: 0 auto;
+    }
+
+    &__image {
+        width: 100%;
+        display: inline-block;
+        border-radius: 50%;
+    }
+
+    &__username {
+        text-align: center;
+    }
+}

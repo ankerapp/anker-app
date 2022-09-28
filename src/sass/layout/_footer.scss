@@ -1,0 +1,24 @@
+@use '../abstracts' as *;
+
+.footer {
+    grid-column: col-start 4 / col-end 9;
+    padding: 4rem;
+    padding-top: 8rem;
+
+    @include respond(tab-port) {
+        grid-column: col-start 3 / col-end 10;
+    }
+
+    @include respond(phone) {
+        grid-column: col-start 1 / col-end 12;
+        padding: 4rem 2rem;
+        padding-top: 8rem;
+    }
+}
+
+.logo {
+    width: 4rem;
+    height: 4rem;
+    display: block;
+    margin: 0 auto;
+}

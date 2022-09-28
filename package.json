@@ -1,0 +1,40 @@
+{
+  "name": "Anker",
+  "version": "1.0.0",
+  "description": "A simple app for creating bio links",
+  "main": "index.js",
+  "scripts": {
+    "devServer": "webpack serve",
+    "watch": "webpack -w",
+    "bundle": "webpack --config webpack.config.js --no-devtool --env EnvMode=prod",
+    "copy-data": "cp data.json dist/",
+    "copy-dist": "cp -r dist/* anker-demo-dist/",
+    "start": "npm-run-all --parallel devServer watch",
+    "build": "npm-run-all bundle copy-data"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ankerapp/anker-app.git"
+  },
+  "author": "https://github.com/0xkhan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ankerapp/anker-app/issues"
+  },
+  "homepage": "https://github.com/ankerapp/anker-app#readme",
+  "devDependencies": {
+    "css-loader": "^6.7.1",
+    "css-minimizer-webpack-plugin": "^4.0.0",
+    "file-loader": "^6.2.0",
+    "html-loader": "^3.1.2",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.6.1",
+    "npm-run-all": "^4.1.5",
+    "sass": "^1.52.3",
+    "sass-loader": "^13.0.0",
+    "terser-webpack-plugin": "^5.3.3",
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.9.2"
+  }
+}
