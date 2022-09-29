@@ -73,7 +73,26 @@ start customizing. Make sure you manually copy `data.json` to `dist/` directory.
 
 ### The SASS Files <a name="sass-files"></a>
 ```
-Sass Files Tree
+.
+├── abstracts
+│   ├── _fonts.scss
+│   ├── _index.scss
+│   ├── _mixins.scss
+│   └── _variables.scss
+├── base
+│   ├── _base.scss
+│   ├── _grid.scss
+│   └── _typography.scss
+├── layout
+│   ├── _body.scss
+│   ├── _footer.scss
+│   └── _header.scss
+├── main.scss
+└── themes
+    ├── _classic-dark.scss
+    ├── _classic-light.scss
+    ├── _modern-dark.scss
+    └── _modern-light.scss
 ```
 
 ### The theme file <a name="theme-file"></a>
