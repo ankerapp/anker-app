@@ -102,7 +102,7 @@ much to be changed. The whole template has a background, profile picture, name
 and the links. Inside your theme file you can change all those things. See the
 code below:
 
-```sass
+```scss
 @use '../abstracts' as *;
 
 // Here you can define your own variables for colors etc
@@ -178,7 +178,7 @@ and ideally you wanna do it after you run `npm run start`.
 
 See the content of `main.scss` file below:
 
-```sass
+```scss
 @use 'base/base';
 @use 'base/grid';
 @use 'base/typography';
