@@ -3,7 +3,7 @@ Anker is a very light weight template for social media bio links like Linktree.
 The template is very little SASS and JS code that anybody can change in few 
 minutes. With Anker you can make Landing Pages super fast and super easy.
 
->:warning: &nbsp; Disclaimer: I wrote the whole thing in an afternoon so the
+> **Warning**: I wrote the whole thing in an afternoon so the
 code is not very sophisticated. If you have any suggestions feel free to
 let me know.
 
@@ -165,7 +165,6 @@ body {
     stroke-linecap: round;
     stroke-linejoin: round;
     fill: none;
-
     cursor: pointer;
 }
 ```
@@ -202,8 +201,7 @@ JSON file. If you want to serve the JSON file locally then add your links to
 `data.json` file and `npm run build` will copy it to `dist/` directory.
 Otherwise you can serve it from somewhere else.
 
-> **Note** 
-> `npm run build` will not copy the `data.json`file on windows. You might wanna copy it manually.
+> **Note**: `npm run build` will not copy the `data.json`file on windows. You might wanna copy it manually.
 
 ### The JSON File <a name="json-file"></a>
 The JSON file is very straight forward. `name` is your name you want to show.
@@ -344,8 +342,7 @@ fetch('data.json')
     .catch(err => console.log(err));
 ```
 
-> **Note** 
-> If you want to serve the JSON file from somewhere else then you have to make sure that you set the correct `fetch()` parameters and take care of CORS.
+> **Note**: If you want to serve the JSON file from somewhere else then you have to make sure that you set the correct `fetch()` parameters and take care of CORS.
 
 Code example below shows how would it look if your JSON file is hosted somewhere
 else:
@@ -380,8 +377,7 @@ change this block of code if you don't want the social icons or you want your
 links to have drop-down content or want some widgets e.g. embedding video, Fundme
 widget, buymeacoffee etc.
 
-> **Note** 
-> You don't have to have separate CSS and JS files. You can merge Anker's CSS and JS files with your own after bundling or bundle it with your main CSS and JS code.
+> **Note**: You don't have to have separate CSS and JS files. You can merge Anker's CSS and JS files with your own after bundling or bundle it with your main CSS and JS code.
 
 ### Deployment <a name="deployment"></a>
 How do you wanna deploy it is up to you. If you want to use Anker as your
