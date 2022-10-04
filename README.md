@@ -178,11 +178,16 @@ and ideally you wanna do it after you run `npm run start`.
 See the content of `main.scss` file below:
 
 ```scss
-@forward "base";
-@forward "layout";
+@use 'base/base';
+@use 'base/grid';
+@use 'base/typography';
+
+@use 'layout/header';
+@use 'layout/body';
+@use 'layout/footer';
 
 // This is where you use your theme
-@forward 'themes';
+@use 'themes/modern-light';
 ```
 
 * For the `background` you can have whatever you want simple one color, gradient,
