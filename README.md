@@ -82,15 +82,18 @@ start customizing. Make sure you manually copy `data.json` to `dist/` directory.
 ├── base
 │   ├── _base.scss
 │   ├── _grid.scss
+│   ├── _index.scss
 │   └── _typography.scss
 ├── layout
 │   ├── _body.scss
 │   ├── _footer.scss
-│   └── _header.scss
+│   ├── _header.scss
+│   └── _index.scss
 ├── main.scss
 └── themes
     ├── _classic-dark.scss
     ├── _classic-light.scss
+    ├── _index.scss
     ├── _modern-dark.scss
     └── _modern-light.scss
 ```
