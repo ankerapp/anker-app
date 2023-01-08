@@ -1,20 +1,55 @@
 {
     "name": "John Doe",
+    
+    "profilePic": "https://ankerdata.netlify.app/profile-img-logo-only.png",
 
-    "links": {
-        "Link One": "https://link.com/",
-        "Link Tow": "https://link.com",
-        "Link Three": "https://link.com",
-        "Link Four": "https://link.com",
-        "Link Five": "https://link.com",
-        "Link Six": "https://link.com",
-        "Link Seven": "https://link.com"
-    },
+    "links": [
+        {
+            "title": "Link One",
+            "link": "https://link.com/"
+        },
+        {
+            "title": "Link Two",
+            "link": "https://link.com/"
+        },
+        {
+            "title": "Link Three",
+            "link": "https://link.com/"
+        },
+        {
+            "title": "Link Four",
+            "link": "https://link.com/"
+        },
+        {
+            "title": "Link Five",
+            "link": "https://link.com/"
+        },
+        {
+            "title": "Link Six",
+            "link": "https://link.com/"
+        },
+        {
+            "title": "Link Seven",
+            "link": "https://link.com/"
+        }
+    ],
 
-    "social": {
-        "github": "https://github.com/0xkhan",
-        "dribbble": "https://dribbble.com/0xkhani",
-        "twitter": "https://twitter.com/0xkhani",
-        "instagram": "https://instagram.com/0xkhani"
-    }
+    "socials": [
+        {
+            "title": "github",
+            "link": "https://github.com/0xkhan"
+        },
+        {
+            "title": "dribbble",
+            "link": "https://dribbble.com/0xkhani"
+        },
+        {
+            "title": "twitter",
+            "link": "https://twitter.com/0xkhani"
+        },
+        {
+            "title": "instagram",
+            "link": "https://instagram.com/0xkhani"
+        }
+    ]
 }

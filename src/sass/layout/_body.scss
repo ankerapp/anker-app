@@ -12,4 +12,11 @@
         grid-column: col-start 1 / col-end 12;
         padding: 2rem;
     }
+
+    &__load {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 }
