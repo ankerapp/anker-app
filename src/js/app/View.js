@@ -21,7 +21,8 @@ class View {
         this.#clear();
         this.#parentElem.insertAdjacentHTML('afterbegin', markup);
 
-        this.initThemeScripts(view._initScripts);
+        // Run theme relates scripts
+        view._initScripts(this.#data);
     }
 
     #clear() {
