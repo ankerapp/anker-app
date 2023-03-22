@@ -1,4 +1,5 @@
 import FreeFall from '../plugins/FreeFall';
+import apps from '../plugins/Apps';
 
 class DefaultThemeBasic {
 
@@ -12,19 +13,6 @@ class DefaultThemeBasic {
                     <p class="header__username lead">${data.name}</p>
                 </div>
             </header>
-        `;
-    }
-
-    _generateBodyMarkup_1(data) {
-        return `
-            <section class="app-body">
-                <ul class="links">
-                    ${data.links.map(this.#generateLinksMarkup).join('')}
-                </ul>
-                <ul class="social-links">
-                    ${data.socials.map(this.#generateSocialsMarkup).join('')}
-                </ul>
-            </section>
         `;
     }
 
@@ -70,6 +58,7 @@ class DefaultThemeBasic {
                     <div class="link-item__container">
                         <div class="link__app" data-app-id="${link.app}">
                             <div class="link__app-container">
+                                <div class="link__app-content"></div>
                                 <div class="link__app-close-btn">
                                     <span class="link__app-close-icon-box" data-app-close="${link.app}">
                                         <svg class="link__app-close-icon">
@@ -111,7 +100,7 @@ class DefaultThemeBasic {
         </li>`;
     }
 
-    _initScripts() {
+    _initScripts(data) {
 
         // Scale link on hover
         const links = document.querySelectorAll('.link');
@@ -133,17 +122,25 @@ class DefaultThemeBasic {
                 closer: 'data-app-close',
                 id: 'data-app-id'
             }
-        })
+        });
 
-        // Handle dropdowns
-        // const dropdowns = document.querySelectorAll('[data-type="dropdown"]');
-        // dropdowns.forEach((dropdown) => {
-        //     dropdown.addEventListener('click', (event) => {
-        //         event.preventDefault();
-        //         const appID = dropdown.getAttribute('data-app');
-        //         document.querySelector(`[data-app-id="${appID}"]`).classList.add('link__app-show');
-        //     });
-        // });
+        // Extract apps related data from data object
+        const embedLinks = new Map();
+        data.links.forEach((link) => {
+            if (link.hasOwnProperty('app')) {
+                embedLinks.set(`${link.app}`, `${link.link}`);
+            }
+        });
+
+        const ddApp = document.querySelector('[data-app-id="youtube"]');
+        ddApp.addEventListener('afterDrop', (event) => {
+            const targetApp = event.detail;
+            // let embedLink;
+            // data.links.forEach((link) => {
+            //     if (link.hasOwnProperty('app') && link.app === 'youtube') embedLink = link.link;
+            // });
+            targetApp.querySelector('.link__app-content').innerHTML = apps._appYouTube(embedLinks.get('youtube'));
+        });
 
     }
 
