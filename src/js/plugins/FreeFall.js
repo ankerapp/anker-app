@@ -71,8 +71,10 @@ export default class FreeFall {
 
         if (this.currentDD.length > 0) this.roll({ ddID: this.currentDD });
 
+        this.handleCustomEvents({ type: 'beforeDrop', ddContainer });
         ddContainer.classList.add(this.options.showDropdownCSS);
         this.currentDD = ddID;
+        this.handleCustomEvents({ type: 'afterDrop', ddContainer });
     }
 
     /**
@@ -83,8 +85,15 @@ export default class FreeFall {
     roll({ ddID }) {
         const ddContainer = document.querySelector(`[${this.ddDataAtt}=${ddID}]`);
 
+        this.handleCustomEvents({ type: 'beforeRoll', ddContainer });
         ddContainer.classList.remove(this.options.showDropdownCSS);
         this.currentDD = '';
+        this.handleCustomEvents({ type: 'afterRoll', ddContainer });
+    }
+
+    handleCustomEvents({ type, ddContainer }) {
+        const event = new CustomEvent(type, { bubbles: true, detail: ddContainer });
+        ddContainer.dispatchEvent(event);
     }
 
 }
