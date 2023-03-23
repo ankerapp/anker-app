@@ -61,7 +61,7 @@ class DefaultThemeBasic {
                                 <div class="link__app-content"></div>
                                 <div class="link__app-close-btn">
                                     <span class="link__app-close-icon-box" data-app-close="${link.app}">
-                                        <svg class="link__app-close-icon">
+                                        <svg class="tabler-icon link__app-close-icon">
                                             <use href="./assets/tabler-sprite.svg#tabler-x"/>
                                         </svg>
                                     </span>
@@ -71,7 +71,7 @@ class DefaultThemeBasic {
                         <div class="link-item__btn-container">
                             <button class="link-item__button link" data-type="${link.type}" data-app-trigger="${link.app}">
                                 <span class="link__text">${link.title}</span>
-                                <span><svg class="link__icon">
+                                <span><svg class="tabler-icon link__icon">
                                     <use href="./assets/tabler-sprite.svg#tabler-chevron-down"/>
                                 </svg></span>
                             </button>
@@ -93,7 +93,7 @@ class DefaultThemeBasic {
     #generateSocialsMarkup(social) {
         return `<li class="social-link-item">
             <a class="social-link" href="${social.link}">
-                <svg class="social-icon">
+                <svg class="tabler-icon social-icon">
                     <use href="./assets/tabler-sprite.svg#tabler-brand-${social.title}"/>
                 </svg>
             </a>
@@ -115,6 +115,7 @@ class DefaultThemeBasic {
             })
         });
 
+        // Dropdown and Apps setup using FreeFall and Apps plugins
         const freeFall = new FreeFall({
             showDropdownCSS: 'link__app-show',
             dataAttributes: {
@@ -135,11 +136,9 @@ class DefaultThemeBasic {
         const ddApp = document.querySelector('[data-app-id="youtube"]');
         ddApp.addEventListener('afterDrop', (event) => {
             const targetApp = event.detail;
-            // let embedLink;
-            // data.links.forEach((link) => {
-            //     if (link.hasOwnProperty('app') && link.app === 'youtube') embedLink = link.link;
-            // });
-            targetApp.querySelector('.link__app-content').innerHTML = apps._appYouTube(embedLinks.get('youtube'));
+            const targetElem = targetApp.querySelector('.link__app-content');
+
+            targetElem.innerHTML = apps._appYouTube(embedLinks.get('youtube'));
         });
 
     }
