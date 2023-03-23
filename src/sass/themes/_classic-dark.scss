@@ -6,15 +6,26 @@ body {
     font-weight: var(--font-weight-regular);
 }
 
-.logo {
-    fill: var(--color-dark-primary);
-}
-
 .links {
     list-style: none;
 }
 
+.link-item {
+    position: relative;
+    &:not(:last-child) {
+        margin-bottom: 1.5rem;
+    }
+
+    &__button {
+        cursor: pointer;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}
+
 .link {
+    &,
     &:link,
     &:visited {
         text-decoration: none;
@@ -24,13 +35,94 @@ body {
         padding: 1.5rem;
         border-radius: .5rem;
         text-align: center;
+
+        border: none;
+        width: 100%;
+        line-height: 1.7;
     }    
+    
+    &__icon {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        right: 2rem;
+        top: 2rem;
+    }
+
+    &__text,
+    &__icon {
+        pointer-events: none;
+    }
 }
 
-.link-item {
-    &:not(:last-child) {
-        margin-bottom: 1.5rem;
+.link__app {
+    width: 100%;
+    height: 57.2px;
+    background-color: var(--color-dark-primary);
+    box-shadow: .1rem .1rem 2rem rgba(#000, .2);
+    border-radius: 0.5rem;
+    transition: all .5s;
+    position: relative;
+    visibility: hidden;
+}
+
+.link__app-container {
+    height: 350px;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.link__app-content {
+    overflow: scroll;
+}
+
+.link__app-content iframe {
+    border-radius: 0.5rem;
+}
+
+.link__app-show {
+    height: 350px;
+    margin-bottom: 5rem;
+    position: relative;
+    visibility: visible;
+    z-index: 2;
+}
+
+.link__app-show .link__app-container {
+    visibility: visible;
+    opacity: 1;
+}
+
+.link__app-close-btn {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: -4rem;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.link__app-close-icon-box {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50rem;
+    color: var(--color-white);
+    background-color: rgba(#000, .5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color .1s;
+
+    &:hover {
+        background-color: rgba(#000, .8);
     }
+}
+
+.link__app-close-icon {
+    width: 15px;
+    height: 15px;
+    pointer-events: none;
 }
 
 .social-links {
@@ -53,11 +145,9 @@ body {
 .social-icon {
     width: 25px;
     height: 25px;
-    stroke: currentColor;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    fill: none;
-
     cursor: pointer;
+}
+
+.logo {
+    fill: var(--color-dark-primary);
 }
