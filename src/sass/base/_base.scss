@@ -16,6 +16,14 @@ body {
     box-sizing: border-box;
 }
 
+.tabler-icon {
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+}
+
 .spinner {
     margin: 5rem auto;
     text-align: center;
