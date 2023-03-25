@@ -1,6 +1,6 @@
 # Anker
 Anker is a very light weight template for social media bio links like Linktree. 
-The template is very little SASS and JS code that anybody can change in few 
+The template is very little SASS and JS code that anybody can customize in few 
 minutes. With Anker you can make Landing Pages super fast and super easy.
 
 # Table of contents
@@ -34,7 +34,7 @@ reasons why you don't have to or don't want to.
    websites that have extensions like `.ee`, `.bio`, `.site` etc. It can be
    done in few minutes and can easily make you some extra $$.
 6. You can use this template and make your favorite theme and sell it on
-   Gumtree or something. This however is not the motivation behind Anker but it
+   Gumtree or similar apps. This however is not the motivation behind Anker but it
    certainly is a possibility.
 7. As developers we have our own domain names and can design better landing
    pages. it's always better to have `john.com/bio` than `linktr.ee/john` or
@@ -44,28 +44,30 @@ Finally, you can now make your own bio links/ landing pages for free in a matter
 minutes.
 
 ### The Codebase <a name="codebase"></a>
-The whole template is made up of some SASS files and one JS file and the data is
-served from a JSON file. Why JSON file you ask? Well, we only have to store a
-few links it's unnecessary to create a database for that. Also I wanted to keep
-it very simple so anybody who wants to customize it doesn't have to go through
-the pain of setting up the back-end, API or other unnecessary complex things.
-The JSON file can either be stored locally or served from somewhere else ideally
-raw JSON from GitHub. The only problem with reading raw data from GitHub is that
-it might be slower than reading from local file.
+The whole template is made up of some SASS and JS files. The data is served from a
+JSON file. The JSON file can either be stored locally or served from somewhere else
+ideally raw JSON from GitHub. The only problem with reading raw data from GitHub is
+that it might be slower than reading from local file.
 
-The best option however is Netlify. Netlify's starter plan allows you host your
-data/website for free. You can host both your `data.json` file and profile
-picture. The best part is that your data is hosted on their CDN so it's 
-super fast. [Netlify
+The best option however is services like Netlify, Cloudflare pages etc. Netlify's
+starter plan allows you to host your data/website for free. You can host both your
+`data.json` file and profile picture. The best part is that your data is hosted on
+their CDN so it's super fast. [Netlify
 Solution](https://github.com/ankerapp/anker-app#how-to-host-your-json-file-on-netlify)
 
 # How do I make my own theme <a name="how"></a>
 
 ### Get the source code <a name="get-source-code"></a>
-First, clone this repo. Run `npm install` to install all the dependencies.
-After the dependencies are installed run `npm run start` to watch for changes
-and start a live server. Now you want to navigate to `sass/` directory and
-start customizing. Make sure you manually copy `data.json` to `dist/` directory.
+First, clone this repo. Run the following command to install all the dependencies.
+```bash
+npm install
+```
+After the dependencies are installed you want to watch for changes and start a live
+server by running the command below.
+```bash
+npm run start
+```
+Now you want to navigate to `sass/` directory and start customizing.
 
 ### The SASS Files <a name="sass-files"></a>
 ```
@@ -169,18 +171,16 @@ body {
 }
 ```
 
-Before you start customizing add your theme file to `main.scss` file so it can
-be compiled for use. You only have to add the theme you want to use not all of
-them if you have more than one. Also copy `data.json` file to your dist so you
-have data to test during development. Unfortunately you have to copy it manually
-and ideally you wanna do it after you run `npm run start`.
+Before you start customizing add your theme file to `_index.scss` inside
+`themes` directory so it can be compiled for use. You only have to add the theme
+you want to use not all of them if you have more than one. Also copy `data.json`
+file to your dist so you have data to test during development. Normally inside
+`src/js/config.js` the data will be linked.
 
-See the content of `main.scss` file below:
+See the content of `src/themes/_index.scss` file below:
 
 ```scss
-@forward 'base';
-@forward 'layout';
-@forward 'themes';
+@forward "classic-dark";
 ```
 
 * For the `background` you can have whatever you want simple one color, gradient,
@@ -188,8 +188,7 @@ gradient mesh, image, video etc.
 * The `.logo` class sets the fill property of the Anker logo in footer. The
     logo has to be in the footer.
 * The `.link` class is the one you want to change. You can add hover effects to 
-    it, animation or even make it drop-down to show some content. Of course you
-    might want to add some JS to `index.js` file if required.
+    it, animation or even make it drop-down to show some content.
 * For the `social-link` you also don't have to do much except for the color. if
     the color is the same as the primary color you can just inherit it from
     parent element.
@@ -204,31 +203,101 @@ might wanna copy it manually.
 
 ### The JSON File <a name="json-file"></a>
 The JSON file is very straight forward. `name` is your name you want to show.
-`links` are the links that are listed on your bio. Instead of `Link One, Link
-Two` etc. you want to give them real names like `My Portfolio` or `My New Book`.
-The `social` is obviously your social links object.
+`links` are thr links that are listed on your bio and `socials` are obviously
+your social links object.
+
 ```json
 {
     "name": "John Doe",
+    
+    "profilePic": "https://ankerdata.netlify.app/profile-img-logo-only.png",
 
-    "profilePic": "<netlify-subdomain>.netlify.app/profile.jpg",
+    "links": [
+        {
+            "title": "Link One",
+            "link": "https://link.com/"
+        },
+        {
+            "title": "Link Two",
+            "link": "https://link.com/"
+        },
+        {
+            "title": "Link Three",
+            "link": "https://link.com/"
+        },
+        {
+            "title": "Link Four",
+            "link": "https://link.com/"
+        },
+        {
+            "title": "Link Five",
+            "link": "https://link.com/"
+        },
+        {
+            "title": "Link Six",
+            "link": "https://link.com/"
+        },
+        {
+            "title": "Link Seven",
+            "link": "https://link.com/"
+        }
+    ],
 
-    "links": {
-        "Link One": "https://link.com/",
-        "Link Two": "https://link.com",
-        "Link Three": "https://link.com",
-        "Link Four": "https://link.com",
-        "Link Five": "https://link.com",
-        "Link Six": "https://link.com",
-        "Link Seven": "https://link.com"
-    },
+    "socials": [
+        {
+            "title": "github",
+            "link": "https://github.com/0xkhan"
+        },
+        {
+            "title": "dribbble",
+            "link": "https://dribbble.com/0xkhani"
+        },
+        {
+            "title": "twitter",
+            "link": "https://twitter.com/0xkhani"
+        },
+        {
+            "title": "instagram",
+            "link": "https://instagram.com/0xkhani"
+        }
+    ]
+}
+```
 
-    "social": {
-        "github": "https://github.com/<your github username>",
-        "dribbble": "https://dribbble.com/<your dribbble username>",
-        "twitter": "https://twitter.com/<your twitter username>",
-        "instagram": "https://instagram.com/<your instagram username>"
-    }
+The above JSON file is for the basic theme. For the Pro version of the themes
+which include dropdown apps you'll have to add some extra information for the
+apps to be recognized. See the key changes below:
+
+```json
+{
+
+    { ... },
+
+    "links": [
+        {
+            "title": "Link One",
+            "link": "https://link.com/"
+        },
+        {
+            "title": "Link Two",
+            "link": "https://www.youtube.com/embed/gdLLRj1Ge7g",
+            "type": "dropdown",
+            "app": "youtube"
+        },
+        {
+            "title": "Link Three",
+            "link": "https://link.com/"
+        },
+        {
+            "title": "Link Four",
+            "link": "https://link.com/",
+            "type": "dropdown",
+            "app": "spotify"
+        }
+    ],
+
+    { ... }
+
 }
 ```
 
