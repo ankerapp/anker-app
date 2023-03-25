@@ -345,6 +345,23 @@ your JSON file like following:
 
 # I want more customization <a name="more-customization"></a>
 ### The JS File <a name="js-file"></a>
+
+```
+.
+├── app
+│   ├── Controller.js
+│   ├── Model.js
+│   └── View.js
+├── config.js
+├── helpers.js
+├── plugins
+│   ├── Apps.js
+│   └── FreeFall.js
+└── themes
+    ├── DefaultThemeBasic.js
+    └── DefaultThemePro.js
+```
+
 ```javascript
 import './sass/main.scss'
 import './assets/tabler-sprite.svg'
