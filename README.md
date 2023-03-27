@@ -13,7 +13,7 @@ minutes. With Anker you can make Landing Pages super fast and super easy.
     * [The theme file](#theme-file)
     * [The JSON file](#json-file)
 5. [I want more customization](#more-customization)
-    * [The JS file](#js-file)
+    * [The JS file](#js-files)
 6. [Deployment](#deployment)
 7. [Contributing to Anker](#contribution)
 
@@ -193,6 +193,10 @@ gradient mesh, image, video etc.
     the color is the same as the primary color you can just inherit it from
     parent element.
 
+* This is not all. You can also customize the JS theme file. You might want to
+    add description above the links, embed a video or audio, add a mailing list
+    subscription form etc. See the JS file customization [here](#more-customization)!
+
 And that's it you now have your own theme. But wait you have to link your
 JSON file. If you want to serve the JSON file locally then add your links to
 `data.json` file and `npm run build` will copy it to `dist/` directory.
@@ -203,7 +207,7 @@ might wanna copy it manually.
 
 ### The JSON File <a name="json-file"></a>
 The JSON file is very straight forward. `name` is your name you want to show.
-`links` are thr links that are listed on your bio and `socials` are obviously
+`links` are the links that are listed on your bio and `socials` are obviously
 your social links object.
 
 ```json
@@ -344,7 +348,7 @@ your JSON file like following:
 ```
 
 # I want more customization <a name="more-customization"></a>
-### The JS File <a name="js-file"></a>
+### The JS Files <a name="js-files"></a>
 
 ```
 .
@@ -362,110 +366,400 @@ your JSON file like following:
     └── DefaultThemePro.js
 ```
 
+Inside `src/js/` there are three directories `app`, `plugins` and `themes`. The
+`themes` directory is the one where the themes are. There are two default themes
+included in `anker-app` repository.
+
+The `DefaultThemeBasic` is the one with very basic markup. The Pro version of
+the theme can do more that just displaying links. In the Pro version you can add
+dropdown links and third party apps e.g embedding YouTube video, showing your Patreon
+button or mailing list form etc.
+
+The markup for third party apps can be added in the `Apps.js` file inside
+`plugins` directory.
+
+## Let's have a look what is inside the theme files
+
+### Default theme basic
+
 ```javascript
-import './sass/main.scss'
-import './assets/tabler-sprite.svg'
-import profilePic from './assets/profile.jpg'
+class DefaultThemeBasic {
 
-fetch('https://ankerdata.netlify.app/data.json')
-    .then(response => response.json())
-    .then(data => renderData(data))
-    .catch(err => console.log(err));
-
-function renderData(data) {
-    const profileImage = document.getElementById('header__image');
-    const userName = document.querySelector('.header__username');
-    const linksContainer = document.querySelector('.links');
-    const socialLinksContainer = document.querySelector('.social-links');
-
-    profileImage.src = data.profilePic;
-    userName.innerText = data.name;
-
-    // Fallback for profile picture
-    profileImage.addEventListener('error', () => {
-        profileImage.src = profilePic;
-    });
-
-    for (const key in data.links) {
-        linksContainer.insertAdjacentHTML(
-            'beforeend',
-            `<li class="link-item"><a class="link" href="${data.links[key]}">${key}</a></li>`
-        );
+    _generateHeaderMarkup(data) {
+        return `
+            <header class="header">
+                <div class="header__image-box">
+                    <img id="header__image" class="header__image" src="${data.profilePic}" alt="Profile Pic">
+                </div>
+                <div class="header__profile-username">
+                    <p class="header__username lead">${data.name}</p>
+                </div>
+            </header>
+        `;
     }
 
-    for (const key in data.social) {
-        socialLinksContainer.insertAdjacentHTML(
-            'beforeend',
-            `<li class="social-link-item">
-                <a class="social-link" href="${data.social[key]}">
-                    <svg class="social-icon">
-                        <use href="./assets/tabler-sprite.svg#tabler-brand-${key}"/>
+    _generateBodyMarkup(data) {
+        return `
+            <section class="app-body">
+                <ul class="links">
+                    ${data.links.map(this.#generateLinksMarkup).join('')}
+                </ul>
+                <ul class="social-links">
+                    ${data.socials.map(this.#generateSocialsMarkup).join('')}
+                </ul>
+            </section>
+        `;
+    }
+
+    _generateFooterMarkup() {
+        return `
+            <footer class="footer">
+                <div class="footer__logo-box">
+                    <svg width="0" height="0" class="hidden">
+                      <symbol version="1.1" id="logo" xmlns="http://www.w3.org/2000/svg" xmlnsSvg="http://www.w3.org/2000/svg" viewBox="0 0 21.62109 32.271481">
+                        <g inkscapeLabel="Layer 1" inkscapeGroupmode="layer" id="layer1" transform="translate(-94.189455,-132.36426)">
+                          <g id="g1427" transform="translate(-438.64257,-4.54199)">
+                            <path d="m 543.64258,141.74805 c -5.95526,0 -10.81055,4.85529 -10.81055,10.81054 0,5.95526 4.85529,10.8125 10.81055,10.8125 5.95525,0 10.81054,-4.85724 10.81054,-10.8125 0,-5.95525 -4.85529,-10.81054 -10.81054,-10.81054 z m 0,2.64453 c 4.52534,0 8.16601,3.64067 8.16601,8.16601 0,4.52535 -3.64067,8.16602 -8.16601,8.16602 -4.52534,0 -8.16602,-3.64067 -8.16602,-8.16602 0,-4.52534 3.64068,-8.16601 8.16602,-8.16601 z" id="circle1358"></path>
+                            <path d="m 536.64453,163.9707 a 1.322915,1.322915 0 0 0 -1.67969,0.82032 1.322915,1.322915 0 0 0 0.82032,1.68164 l 7.85742,2.70507 7.85937,-2.70507 a 1.322915,1.322915 0 0 0 0.82032,-1.68164 1.322915,1.322915 0 0 0 -1.68165,-0.82032 l -6.99804,2.40821 z" id="path1360"></path>
+                            <path d="m 536.18555,136.90625 a 1.322915,1.322915 0 0 0 -1.32227,1.32227 1.322915,1.322915 0 0 0 1.32227,1.32421 h 14.91406 a 1.322915,1.322915 0 0 0 1.32226,-1.32421 1.322915,1.322915 0 0 0 -1.32226,-1.32227 z" id="path1362"></path>
+                          </g>
+                        </g>
+                      </symbol>
                     </svg>
-                </a>
-            </li>`
-        );
+                    <svg class="logo"><use href="#logo"/></svg>
+                </div>
+            </footer>
+        `;
     }
+
+    #generateLinksMarkup(link) {
+        return `<li class="link-item"><a class="link" href="${link.link}">${link.title}</a></li>`;
+    }
+
+    #generateSocialsMarkup(social) {
+        return `<li class="social-link-item">
+            <a class="social-link" href="${social.link}">
+                <svg class="social-icon">
+                    <use href="./assets/tabler-sprite.svg#tabler-brand-${social.title}"/>
+                </svg>
+            </a>
+        </li>`;
+    }
+
+}
+
+export default new DefaultThemeBasic();
+```
+
+As you can see above the theme files only contain the markup. You can customize
+this file however it suits you. See below what the Pro version of the theme
+contains.
+
+### Default theme pro
+```javascript
+import FreeFall from '../plugins/FreeFall';
+import apps from '../plugins/Apps';
+
+class DefaultThemePro {
+
+    _generateHeaderMarkup(data) {
+        return `
+            <header class="header">
+                <div class="header__image-box">
+                    <img id="header__image" class="header__image" src="${data.profilePic}" alt="Profile Pic">
+                </div>
+                <div class="header__profile-username">
+                    <p class="header__username lead">${data.name}</p>
+                </div>
+            </header>
+        `;
+    }
+
+    _generateBodyMarkup(data) {
+        return `
+            <section class="app-body">
+                <div class="links">
+                    ${data.links.map(this.#generateLinksMarkup).join('')}
+                </div>
+                <ul class="social-links">
+                    ${data.socials.map(this.#generateSocialsMarkup).join('')}
+                </ul>
+            </section>
+        `;
+    }
+
+    _generateFooterMarkup() {
+        return `
+            <footer class="footer">
+                <div class="footer__logo-box">
+                    <svg width="0" height="0" class="hidden">
+                      <symbol version="1.1" id="logo" xmlns="http://www.w3.org/2000/svg" xmlnsSvg="http://www.w3.org/2000/svg" viewBox="0 0 21.62109 32.271481">
+                        <g inkscapeLabel="Layer 1" inkscapeGroupmode="layer" id="layer1" transform="translate(-94.189455,-132.36426)">
+                          <g id="g1427" transform="translate(-438.64257,-4.54199)">
+                            <path d="m 543.64258,141.74805 c -5.95526,0 -10.81055,4.85529 -10.81055,10.81054 0,5.95526 4.85529,10.8125 10.81055,10.8125 5.95525,0 10.81054,-4.85724 10.81054,-10.8125 0,-5.95525 -4.85529,-10.81054 -10.81054,-10.81054 z m 0,2.64453 c 4.52534,0 8.16601,3.64067 8.16601,8.16601 0,4.52535 -3.64067,8.16602 -8.16601,8.16602 -4.52534,0 -8.16602,-3.64067 -8.16602,-8.16602 0,-4.52534 3.64068,-8.16601 8.16602,-8.16601 z" id="circle1358"></path>
+                            <path d="m 536.64453,163.9707 a 1.322915,1.322915 0 0 0 -1.67969,0.82032 1.322915,1.322915 0 0 0 0.82032,1.68164 l 7.85742,2.70507 7.85937,-2.70507 a 1.322915,1.322915 0 0 0 0.82032,-1.68164 1.322915,1.322915 0 0 0 -1.68165,-0.82032 l -6.99804,2.40821 z" id="path1360"></path>
+                            <path d="m 536.18555,136.90625 a 1.322915,1.322915 0 0 0 -1.32227,1.32227 1.322915,1.322915 0 0 0 1.32227,1.32421 h 14.91406 a 1.322915,1.322915 0 0 0 1.32226,-1.32421 1.322915,1.322915 0 0 0 -1.32226,-1.32227 z" id="path1362"></path>
+                          </g>
+                        </g>
+                      </symbol>
+                    </svg>
+                    <svg class="logo"><use href="#logo"/></svg>
+                </div>
+            </footer>
+        `;
+    }
+
+    #generateLinksMarkup(link) {
+        let markup;
+        if (link.hasOwnProperty('type')) {
+            markup = `
+                <div class="link-item">
+                    <div class="link-item__container">
+                        <div class="link__app" data-app-id="${link.app}">
+                            <div class="link__app-container">
+                                <div class="link__app-content"></div>
+                                <div class="link__app-close-btn">
+                                    <span class="link__app-close-icon-box" data-app-close="${link.app}">
+                                        <svg class="tabler-icon link__app-close-icon">
+                                            <use href="./assets/tabler-sprite.svg#tabler-x"/>
+                                        </svg>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="link-item__btn-container">
+                            <button class="link-item__button link" data-type="${link.type}" data-app-trigger="${link.app}">
+                                <span class="link__text">${link.title}</span>
+                                <span><svg class="tabler-icon link__icon">
+                                    <use href="./assets/tabler-sprite.svg#tabler-chevron-down"/>
+                                </svg></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `
+        } else {
+            markup = `
+                <div class="link-item">
+                    <a class="link" href="${link.link}">${link.title}</a>
+                </div>
+            `
+        }
+
+        return markup;
+    }
+
+    #generateSocialsMarkup(social) {
+        return `<li class="social-link-item">
+            <a class="social-link" href="${social.link}">
+                <svg class="tabler-icon social-icon">
+                    <use href="./assets/tabler-sprite.svg#tabler-brand-${social.title}"/>
+                </svg>
+            </a>
+        </li>`;
+    }
+
+    _initScripts(data) {
+
+        // Scale link on hover
+        const links = document.querySelectorAll('.link');
+        links.forEach(link => {
+            link.addEventListener('mouseenter', (event) => {
+                event.target.style.transform = 'scale(1.05)';
+                event.target.style.transition = 'all .2s';
+            })
+
+            link.addEventListener('mouseleave', (event) => {
+                event.target.style.transform = 'scale(1)';
+            })
+        });
+
+        // Dropdown and Apps setup using FreeFall and Apps plugins
+        const freeFall = new FreeFall({
+            showDropdownCSS: 'link__app-show',
+            dataAttributes: {
+                trigger: 'data-app-trigger',
+                closer: 'data-app-close',
+                id: 'data-app-id'
+            }
+        });
+
+        // Extract apps related data from data object
+        const embedLinks = new Map();
+        data.links.forEach((link) => {
+            if (link.hasOwnProperty('app')) {
+                embedLinks.set(`${link.app}`, `${link.link}`);
+            }
+        });
+
+        const ddApp = document.querySelector('[data-app-id="youtube"]');
+        ddApp.addEventListener('afterDrop', (event) => {
+            const targetApp = event.detail;
+            const targetElem = targetApp.querySelector('.link__app-content');
+
+            targetElem.innerHTML = apps._appYouTube(embedLinks.get('youtube'));
+        });
+
+    }
+
+}
+
+export default new DefaultThemeBasic();
+```
+
+The Pro version of the theme is not very different from the basic version but
+it's more customizable. One important thing to note is that all the method names
+have to be left as they are. You only have to change the content of the methods.
+You can't rename the methods to something else.
+
+Let's break down everything to understand what's going on.
+
+### Imports
+The first part is some `imports`. Those plugins are related to the themes. The first
+one is a plugin called `FreeFall` which is responsible for dropdowns. The second
+plugin is `Apps` which holds markups for third party apps. You can also add your
+own Markup to `Apps.js`.
+
+```javascript
+import FreeFall from '../plugins/FreeFall';
+import apps from '../plugins/Apps';
+```
+
+### Header, body and footer markup
+The header, body and footer markup methods are self-explanatory and pretty
+straight forward. What is however important are the `map()` methods inbetween
+markups. The map methods generate markup for example from methods such as
+`#generateLinksMarkup()` and `#generateSocialsMarkup()`. See the example below.
+
+```javascript
+_generateBodyMarkup(data) {
+    return `
+        <section class="app-body">
+            <div class="links">
+                ${data.links.map(this.#generateLinksMarkup).join('')}
+            </div>
+            <ul class="social-links">
+                ${data.socials.map(this.#generateSocialsMarkup).join('')}
+            </ul>
+        </section>
+    `;
 }
 ```
 
-The first part is some `imports`. The `tabler-sprite.svg` is for social icons. 
-The `profile.jpg` is the profile picture. It's imported here because of Webpack 
-so it moves it to `dist/` folder.
+### Links markup
+
 ```javascript
-import './sass/main.scss'
-import './assets/tabler-sprite.svg'
-import profilePic from './assets/profile.jpg'
+#generateLinksMarkup(link) {
+    let markup;
+    if (link.hasOwnProperty('type')) {
+        markup = `
+            <div class="link-item">
+                <div class="link-item__container">
+                    <div class="link__app" data-app-id="${link.app}">
+                        <div class="link__app-container">
+                            <div class="link__app-content"></div>
+                            <div class="link__app-close-btn">
+                                <span class="link__app-close-icon-box" data-app-close="${link.app}">
+                                    <svg class="tabler-icon link__app-close-icon">
+                                        <use href="./assets/tabler-sprite.svg#tabler-x"/>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="link-item__btn-container">
+                        <button class="link-item__button link" data-type="${link.type}" data-app-trigger="${link.app}">
+                            <span class="link__text">${link.title}</span>
+                            <span><svg class="tabler-icon link__icon">
+                                <use href="./assets/tabler-sprite.svg#tabler-chevron-down"/>
+                            </svg></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `
+    } else {
+        markup = `
+            <div class="link-item">
+                <a class="link" href="${link.link}">${link.title}</a>
+            </div>
+        `
+    }
+
+    return markup;
+}
 ```
 
-In the second block of code the JSON file is fetched. This is where you want to 
-link your JSON file. Don't change it if your JSON file is served locally. You 
-only have to make sure that it's copied to your `dist/` directory.
+As you can see above the links markup for Pro version is different and has much more
+HTML than the basic version. The method checks if the data has a `type` property with
+which it determines if dropdown should be added. If the `type` property exists then
+it adds the dropdown for the app to load in.
+
+### Socials markup
+
 ```javascript
-fetch('data.json')
-    .then(response => response.json())
-    .then(data => renderData(data))
-    .catch(err => console.log(err));
+#generateSocialsMarkup(social) {
+    return `<li class="social-link-item">
+        <a class="social-link" href="${social.link}">
+            <svg class="tabler-icon social-icon">
+                <use href="./assets/tabler-sprite.svg#tabler-brand-${social.title}"/>
+            </svg>
+        </a>
+    </li>`;
+}
 ```
 
-> **Note**: If you want to serve the JSON file from somewhere else then you have to make
-sure that you set the correct `fetch()` parameters and take care of CORS.
+The markup for the social icons is very straight forward as well. It just loops
+through the data and generates the `li` elements for social icons.
 
-Code example below shows how would it look if your JSON file is hosted somewhere
-else:
+### Init scripts
 ```javascript
-    fetch('http://example.com/data.json', {
-        mode: 'cors',
-        headers: {
-            'Content-type': 'application/json',
-            'Accept': 'application/json'
+_initScripts(data) {
+
+    // Scale link on hover
+    const links = document.querySelectorAll('.link');
+    links.forEach(link => {
+        link.addEventListener('mouseenter', (event) => {
+            event.target.style.transform = 'scale(1.05)';
+            event.target.style.transition = 'all .2s';
+        })
+
+        link.addEventListener('mouseleave', (event) => {
+            event.target.style.transform = 'scale(1)';
+        })
+    });
+
+    // Dropdown and Apps setup using FreeFall and Apps plugins
+    const freeFall = new FreeFall({
+        showDropdownCSS: 'link__app-show',
+        dataAttributes: {
+            trigger: 'data-app-trigger',
+            closer: 'data-app-close',
+            id: 'data-app-id'
         }
-    })
-    .then(response => response.json())
-    .then(data => renderData(data))
-    .catch(err => console.log(err));
+    });
+
+    // Extract apps related data from data object
+    const embedLinks = new Map();
+    data.links.forEach((link) => {
+        if (link.hasOwnProperty('app')) {
+            embedLinks.set(`${link.app}`, `${link.link}`);
+        }
+    });
+
+    const ddApp = document.querySelector('[data-app-id="youtube"]');
+    ddApp.addEventListener('afterDrop', (event) => {
+        const targetApp = event.detail;
+        const targetElem = targetApp.querySelector('.link__app-content');
+
+        targetElem.innerHTML = apps._appYouTube(embedLinks.get('youtube'));
+    });
+
+}
 ```
 
-Read more about `fetch()` parameters 
-[here](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#supplying_request_options).
-
-If you use Netlify as shown above then of course you want to use your Netlify
-link:
-```javascript
-fetch('https://<your-netlify-subdomain>.netlify.app/data.json')
-    .then(response => response.json())
-    .then(data => renderData(data))
-    .catch(err => console.log(err));
-```
-
-The third block of code renders processed data from JSON file. You don't have to
-touch this block of code unless you really have to. The reason you might want to 
-change this block of code if you don't want the social icons or you want your
-links to have drop-down content or want some widgets e.g. embedding video, Fundme
-widget, buymeacoffee etc.
-
-> **Note**: You don't have to have separate CSS and JS files. You can merge Ankers
-CSS and JS files with your own after bundling or bundle it with your main
-CSS and JS code.
+`_initScripts()` is a protected method that runs all the scripts related to a
+specific theme. All your theme related scripts go inside this method.
 
 ### Deployment <a name="deployment"></a>
 How do you wanna deploy it is up to you. If you want to use Anker as your
@@ -474,7 +768,7 @@ wanna use Anker as a bio link to have a link like: `example.com/bio` then
 nothing is stopping you from that as well.
 
 If you already have a website then I'd suggest you to merge the code with
-your CSS and JS and you'll be fine. However if you want to use Anker on it's
+your CSS and JS and that will do it. However if you want to use Anker on it's
 own either you use your own domain or Netlify. I might have a better method
 for you to only deploy your `dist/` directory to live server.
 
