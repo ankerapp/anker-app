@@ -1,7 +1,7 @@
 import FreeFall from '../plugins/FreeFall';
 import apps from '../plugins/Apps';
 
-class DefaultThemeBasic {
+class DefaultThemePro {
 
     _generateHeaderMarkup(data) {
         return `
@@ -145,4 +145,4 @@ class DefaultThemeBasic {
 
 }
 
-export default new DefaultThemeBasic();
+export default new DefaultThemePro();

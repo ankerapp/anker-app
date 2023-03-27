@@ -30,6 +30,7 @@ body {
     &:visited {
         text-decoration: none;
         display: block;
+        font-size: var(--font-size-default);
         color: var(--color-primary);
         background-color: var(--color-dark-primary);
         padding: 1.5rem;
