@@ -797,4 +797,6 @@ for free then join this organisation.
    projects to work on to practice your skills and apply what you've learned.
 5. Contributing to Open Source projects is good for later when you start looking for
    job. You can show the recruiters your contribution and it'll win you some
-   extra points.
+   extra points. Read the [Contributing
+Guidelines](https://github.com/ankerapp/anker-app/blob/master/CONTRIBUTING.md)
+before contributing!
