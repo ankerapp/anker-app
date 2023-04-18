@@ -1,8 +1,8 @@
 @use '../abstracts' as *;
 
 body {
-    color: var(--color-primary);
-    background-color: var(--color-background);
+    color: var(--color-dark-primary);
+    background-color: var(--color-dark-background);
     font-weight: var(--font-weight-regular);
 }
 
@@ -31,20 +31,21 @@ body {
         text-decoration: none;
         display: block;
         font-size: var(--font-size-default);
-        color: var(--color-white);
-        background-color: var(--color-primary);
+        color: var(--color-primary);
+        background-color: var(--color-dark-primary);
         padding: 1.5rem;
-        border-radius: .5rem;
+        border-radius: 50rem;
         text-align: center;
-
+        
         border: none;
         width: 100%;
         line-height: 1.7;
-    }    
+    }
     
     &__icon {
         width: 20px;
         height: 20px;
+
         position: absolute;
         right: 2rem;
         top: 2rem;
@@ -59,9 +60,9 @@ body {
 .link__app {
     width: 100%;
     height: 57.2px;
-    background-color: var(--color-primary);
+    background-color: var(--color-dark-primary);
     box-shadow: .1rem .1rem 2rem rgba(#000, .2);
-    border-radius: 0.5rem;
+    border-radius: 2.8rem;
     transition: all .5s;
     position: relative;
     visibility: hidden;
@@ -78,7 +79,7 @@ body {
 }
 
 .link__app-content iframe {
-    border-radius: 0.5rem;
+    border-radius: 2.6rem;
 }
 
 .link__app-show {
@@ -139,7 +140,7 @@ body {
     &:visited {
         text-decoration: none;
         display: block;
-        color: var(--color-primary);
+        color: var(--color-dark-primary);
     }    
 }
 
@@ -150,5 +151,5 @@ body {
 }
 
 .logo {
-    fill: var(--color-primary);
+    fill: var(--color-dark-primary);
 }

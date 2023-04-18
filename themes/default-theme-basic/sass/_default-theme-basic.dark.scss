@@ -1,0 +1,84 @@
+@use '../abstracts' as *;
+
+body {
+    color: var(--color-dark-primary);
+    background-color: var(--color-dark-background);
+    font-weight: var(--font-weight-regular);
+}
+
+.links {
+    list-style: none;
+}
+
+.link-item {
+    position: relative;
+    &:not(:last-child) {
+        margin-bottom: 1.5rem;
+    }
+
+    &__button {
+        cursor: pointer;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}
+
+.link {
+    &,
+    &:link,
+    &:visited {
+        text-decoration: none;
+        display: block;
+        font-size: var(--font-size-default);
+        color: var(--color-primary);
+        background-color: var(--color-dark-primary);
+        padding: 1.5rem;
+        border-radius: .5rem;
+        text-align: center;
+
+        border: none;
+        width: 100%;
+        line-height: 1.7;
+    }    
+    
+    &__icon {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        right: 2rem;
+        top: 2rem;
+    }
+
+    &__text,
+    &__icon {
+        pointer-events: none;
+    }
+}
+
+.social-links {
+    list-style: none;
+    display: flex;
+    margin-top: 5rem;
+    grid-column-gap: 2rem;
+    justify-content: center;
+}
+
+.social-link {
+    &:link,
+    &:visited {
+        text-decoration: none;
+        display: block;
+        color: var(--color-dark-primary);
+    }    
+}
+
+.social-icon {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.logo {
+    fill: var(--color-dark-primary);
+}
