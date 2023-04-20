@@ -3,6 +3,8 @@ Anker is a very light weight template for social media bio links like Linktree.
 The template is very little SASS and JS code that anybody can customize in few 
 minutes. With Anker you can make Landing Pages super fast and super easy.
 
+![Example Image](example-image.png)
+
 # Table of contents
 1. [Demo](#demo)
 2. [Why not just use Linktree or similar apps?](#why-anker)
