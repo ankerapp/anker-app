@@ -12,8 +12,17 @@ minutes. With Anker you can make Landing Pages super fast and super easy.
     * [The SASS files](#sass-files)
     * [The theme file](#theme-file)
     * [The JSON file](#json-file)
+    * [Using Google Sheets as backend](#google-sheets)
 5. [I want more customization](#more-customization)
     * [The JS file](#js-files)
+    * [Let's have a look what is inside the theme files](#what-is-inside-theme)
+        * [Default theme basic](#theme-basic)
+        * [Default theme pro](#theme-pro)
+        * [Imports](#imports)
+        * [Header, body and footer markup](#header-body-footer)
+        * [Links markup](#links-markup)
+        * [Socials markup](#socials-markup)
+        * [Init scripts](#init-scripts)
 6. [Deployment](#deployment)
 7. [Contributing to Anker](#contribution)
 
@@ -205,6 +214,8 @@ Otherwise you can serve it from somewhere else.
 > **Note**: `npm run build` will not copy the `data.json` file on windows. You
 might wanna copy it manually.
 
+If you want to publish your theme read [these guidelines](https://github.com/ankerapp/anker-themes#how-do-i-make-a-theme).
+
 ### The JSON File <a name="json-file"></a>
 The JSON file is very straight forward. `name` is your name you want to show.
 `links` are the links that are listed on your bio and `socials` are obviously
@@ -309,6 +320,39 @@ After you're finished with everything just build the project by running `npm run
 build`. Now you can take your `dist/` directory and host it on your server. See
 the Netlify solution below.
 
+### Using Google Sheets as backend <a name="google-sheets"></a>
+Instead of JSON file you can also use Google Sheets as backend for your Anker landing
+page. [Here](https://docs.google.com/spreadsheets/d/1tdRaVMG9BSry5SpJCH09VkslR1Sc7tPYH4b5m-RJn9c/edit#gid=0)
+is an example of how your Google sheet will look like.
+
+You have to set your Google Sheet permissions `read-only` for everybody.
+> **Note:** ONLY read permissions should be global not edit otherwise anybody
+can edit your Google sheet!
+
+Inside the `src/js/config.js` file set your Google Sheet ID so it can be read by
+Anker and fetch your data from your sheet.
+
+```javascript
+export const JSON_URL = null;
+export const SHEET_ID = "1tdRaVMG9BSry5SpJCH09VkslR1Sc7tPYH4b5m-RJn9c";
+export const TIMEOUT_SEC = 10;
+export const THEME = "default-theme-pro";
+```
+
+How to get your sheet ID? `SHEET_ID` is the ID you get from your sheet URL for
+example:
+
+```
+https://docs.google.com/spreadsheets/d/1tdRaVMG9BSry5SpJCH09VkslR1Sc7tPYH4b5m-RJn9c/edit#gid=0
+```
+
+Your sheet `SHEET_ID` is inbetween `/d/<sheetId>/edit#`. In the above URL the
+`SHEET_ID` is:
+
+```
+1tdRaVMG9BSry5SpJCH09VkslR1Sc7tPYH4b5m-RJn9c
+```
+
 ### How to host your JSON file on Netlify
 * Create a directory e.g `my-anker-data/`. See [My Data Repo](https://github.com/0xkhan/anker-data)
 * Copy your `data.json` file to `my-anker-data/`
@@ -378,9 +422,9 @@ button or mailing list form etc.
 The markup for third party apps can be added in the `Apps.js` file inside
 `plugins` directory.
 
-## Let's have a look what is inside the theme files
+## Let's have a look what is inside the theme files <a name="what-is-inside-theme"></a>
 
-### Default theme basic
+### Default theme basic <a name="theme-basic"></a>
 
 ```javascript
 class DefaultThemeBasic {
@@ -455,7 +499,7 @@ As you can see above the theme files only contain the markup. You can customize
 this file however it suits you. See below what the Pro version of the theme
 contains.
 
-### Default theme pro
+### Default theme pro <a name="theme-pro"></a>
 ```javascript
 import FreeFall from '../plugins/FreeFall';
 import apps from '../plugins/Apps';
@@ -614,7 +658,7 @@ You can't rename the methods to something else.
 
 Let's break down everything to understand what's going on.
 
-### Imports
+### Imports <a name="imports"></a>
 The first part is some `imports`. Those plugins are related to the themes. The first
 one is a plugin called `FreeFall` which is responsible for dropdowns. The second
 plugin is `Apps` which holds markups for third party apps. You can also add your
@@ -625,7 +669,7 @@ import FreeFall from '../plugins/FreeFall';
 import apps from '../plugins/Apps';
 ```
 
-### Header, body and footer markup
+### Header, body and footer markup <a name="header-body-footer"></a>
 The header, body and footer markup methods are self-explanatory and pretty
 straight forward. What is however important are the `map()` methods inbetween
 markups. The map methods generate markup for example from methods such as
@@ -646,7 +690,7 @@ _generateBodyMarkup(data) {
 }
 ```
 
-### Links markup
+### Links markup <a name="links-markup"></a>
 
 ```javascript
 #generateLinksMarkup(link) {
@@ -695,7 +739,7 @@ HTML than the basic version. The method checks if the data has a `type` property
 which it determines if dropdown should be added. If the `type` property exists then
 it adds the dropdown for the app to load in.
 
-### Socials markup
+### Socials markup <a name="socials-markup"></a>
 
 ```javascript
 #generateSocialsMarkup(social) {
@@ -712,7 +756,7 @@ it adds the dropdown for the app to load in.
 The markup for the social icons is very straight forward as well. It just loops
 through the data and generates the `li` elements for social icons.
 
-### Init scripts
+### Init scripts <a name="init-scripts"></a>
 ```javascript
 _initScripts(data) {
 
